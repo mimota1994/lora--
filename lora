@@ -1,0 +1,79 @@
+//****class****
+//网关
+class gateway(){
+	int Id;
+	//unique
+	Map loaction;
+	//{"latitude":0,"longitude":0}
+	int status;
+	//0:online,1:offline
+	String creatime;
+	String updatetime;
+}
+
+//lora节点
+class loraNode(){
+	int Id;
+	//unique
+	Map loaction;
+	//{"latitude":0,"longitude":0}
+	int status;
+	//0:online,1:offline
+	String creatime;
+	String updatetime;
+	Map data;
+	//{"temperate":0,"distance":0}
+	//有时候前台要展示节点的最终信息，所以要储存最后一次的状态
+	float battery;
+	//0.00
+}
+
+//lora节点发生的事件
+class loraEvent(){
+	String time;
+	Map data;
+	int loraNodeId;
+	int status;
+}
+
+//网关发生的事件
+class gateWay(){
+	int gatewayId;
+	int status;
+}
+
+
+
+
+//****database****
+//数据库以对象为主
+//根据这几个class创建数据库
+
+
+
+
+//****method****
+receiveFromGateway(Map map){
+	//map={"gatawayId":gatewayId,"loraNodeId":loraNodeId,"data":data,"battery":battery}
+	//data={"temperate":0,"distance":0}
+	//todo 接收网关发来的数据，更新数据库中lora节点的data
+	//todo 将data存储到event中
+	//todo 更新数据库中lora节点的电量
+	//todo 刷新前端页面
+}
+
+
+//地图
+//前端的地图展示的是lora节点的位置，以及网关的位置，以位置点的形式展示，可以标明id，网关和节点的颜色可以不同，以达到区分，
+//位置点还可以设计成垃圾桶的样式，并且根据distance的数据，可以直观的展示垃圾桶的空满情况，并且在distance达到阈值或者status改变的情况下，发出警告
+//由于位置点可能比较多，所以详细信息不建议直接在顶层界面展示，而是设计二级界面，在用户点击之后，展示节点的详细信息
+//详细信息包括，id，电量（lora节点），status（上线或者下线），最后一次测量到的数据
+//在事件发生之后，地图会刷新
+//事件也就是lora节点或者网关状态改变，或者接收到data
+
+
+//admin
+//用户可以查看某个网关或某个lora节点的events，也可以查看所有的发生的事件
+//查看所有的事件也就是查询loraEvent的数据库以及gatewayEvent的数据库，并以事时间为顺序展示
+//查看单个节点，就是在对应的数据库中找到该节点的所有事件，并按照时间展示
+//todo 用户操作（创建，删除等）
